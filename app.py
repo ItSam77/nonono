@@ -1005,4 +1005,7 @@ async def health():
 # ── Run ──────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("app:app", host="0.0.0.0", port=8020, reload=True)
+    host = os.getenv("HOST", "0.0.0.0")
+    port = int(os.getenv("PORT", 8020))
+    # Di VPS (Production), pastikan reload=False. Atau jalankan langsung via CLI uvicorn.
+    uvicorn.run("app:app", host=host, port=port, reload=False)
